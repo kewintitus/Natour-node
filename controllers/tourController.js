@@ -59,30 +59,40 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.updateTour = (req, res) => {
-  //   if (req.params.id * 1 > tours.length) {
-  //     // if (!tour) {
-  //     return res.status(404).json({ status: 'fail', message: 'invalid id' });
-  //   }
+exports.updateTour = async (req, res) => {
+  try {
+    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: '<Updated tour here...></Updated>',
-    },
-  });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tour,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error });
+  }
 };
 
-exports.deleteTour = (req, res) => {
+exports.deleteTour = async (req, res) => {
+  try {
+    await Tour.findByIdAndDelete(req.params.id);
+
+    res.status(204).json({
+      status: 'success',
+      message: 'deleted successfully',
+    });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error });
+  }
+
   //   if (req.params.id * 1 > tours.length) {
   //     // if (!tour) {
   //     return res.status(404).json({ status: 'fail', message: 'invalid id' });
   //   }
-
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
 };
 
 //LEGACY CODE
