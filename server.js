@@ -19,7 +19,7 @@ mongoose
   })
   .then((con) => {
     // console.log(con);
-    console.log('DB coneection success');
+    console.log('DB connection success');
   });
 // console.log(process.env);
 
