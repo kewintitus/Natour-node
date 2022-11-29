@@ -1,5 +1,6 @@
 const AppError = require('../utils/appError');
 const User = require('./../models/userModel');
+const factory = require('./handlerFactory');
 
 const catchAsync = require('./../utils/catchAsync');
 
@@ -19,18 +20,10 @@ exports.getUser = (req, res) => {
     message: 'route not implemented',
   });
 };
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'route not implemented',
-  });
-};
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'route not implemented',
-  });
-};
+
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);
+
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
