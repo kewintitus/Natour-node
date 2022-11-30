@@ -1,7 +1,7 @@
 const Review = require('./../models/reviewModel');
 const AppError = require('../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
-const catchAsync = require('./../utils/catchAsync');
+// const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
 
 // exports.createReview = catchAsync(async (req, res, next) => {
@@ -26,25 +26,26 @@ exports.setTourUserIds = (req, res, next) => {
   next();
 };
 
-exports.getAllReviews = catchAsync(async (req, res, next) => {
-  //   const features = new APIFeatures(Review.find(), req.query);
+// exports.getAllReviews = catchAsync(async (req, res, next) => {
+//   //   const features = new APIFeatures(Review.find(), req.query);
 
-  let filter;
-  if (req.params.tourId) filter = { tour: req.params.tourId };
+//   let filter;
+//   if (req.params.tourId) filter = { tour: req.params.tourId };
 
-  const reviews = await Review.find(filter);
+//   const reviews = await Review.find(filter);
 
-  res.status(200).json({
-    status: 'success',
-    // requestedAt: req.requestTime,
-    results: reviews.length,
-    data: {
-      reviews,
-    },
-  });
-});
+//   res.status(200).json({
+//     status: 'success',
+//     // requestedAt: req.requestTime,
+//     results: reviews.length,
+//     data: {
+//       reviews,
+//     },
+//   });
+// });
 
+exports.getAllReviews = factory.getAll(Review);
+exports.getReview = factory.getOne(Review);
 exports.createReview = factory.createOne(Review);
-
 exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
