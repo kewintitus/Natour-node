@@ -27,7 +27,7 @@ exports.getTour = catchAsync(async (req, res) => {
   // console.log(reviews);
 
   res.status(200).render('tour', {
-    title: `${req.params.slug.toUpperCase()}`,
+    title: `${tour.name}`,
     tour,
   });
 });
